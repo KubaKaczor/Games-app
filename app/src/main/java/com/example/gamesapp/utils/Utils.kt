@@ -14,23 +14,55 @@ fun getPeriodDates(months: Long): String {
     return "$todayString,$endDate"
 }
 
-fun getStoreImageIdByName(name: String): Int{
-    var imageId = 0
+fun getStoreAndImage(name: String, getResults : (Int, String) -> Unit){
+    var imageId = -1
+    var store = ""
     with(name) {
         when {
-            contains("steam") -> imageId = R.drawable.steam_logo
-            contains("epic") -> imageId = R.drawable.epic_logo
-            contains("gog") -> imageId = R.drawable.gog_logo
-            contains("microsoft") -> imageId = R.drawable.microsoft_logo
-            contains("playstation") -> imageId = R.drawable.playstation_logo
-            contains("apple") -> imageId = R.drawable.appstore_logo
-            contains("nintendo") -> imageId = R.drawable.nintendo_logo
-            contains("xbox360") -> imageId = -1
-            contains("play.google") -> imageId = R.drawable.googleplay_logo
-            contains("itch") -> imageId = R.drawable.itch_logo
-            else -> imageId = -1
+            contains("steam") ->{
+                imageId = com.example.gamesapp.R.drawable.steam_logo
+                store = "Steam"
+            }
+            contains("epic") ->{
+                imageId = com.example.gamesapp.R.drawable.epic_logo
+                store = "Epic Games Store"
+            }
+            contains("gog") -> {
+                imageId = com.example.gamesapp.R.drawable.gog_logo
+                store = "GOG"
+            }
+            contains("microsoft") -> {
+                imageId = com.example.gamesapp.R.drawable.microsoft_logo
+                store = "Microsoft"
+            }
+            contains("playstation") -> {
+                imageId = com.example.gamesapp.R.drawable.playstation_logo
+                store= "Playstation Store"
+            }
+            contains("apple") -> {
+                imageId = com.example.gamesapp.R.drawable.appstore_logo
+                store = "App Store"
+            }
+            contains("nintendo") -> {
+                imageId = com.example.gamesapp.R.drawable.nintendo_logo
+                store = "Nintendo"
+            }
+            contains("xbox360") -> {
+                imageId = -1
+            }
+            contains("play.google") -> {
+                imageId = com.example.gamesapp.R.drawable.googleplay_logo
+                store = "Google play"
+            }
+            contains("itch") -> {
+                imageId = com.example.gamesapp.R.drawable.itch_logo
+                store = "Itch"
+            }
+            else -> {
+                imageId = -1
+                store = "Unknown"
+            }
         }
     }
-    return imageId
-
+    getResults(imageId, store)
 }

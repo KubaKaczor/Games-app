@@ -37,6 +37,7 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
@@ -50,9 +51,7 @@ import com.example.gamesapp.data.Resource
 import com.example.gamesapp.model.*
 import com.example.gamesapp.navigation.Screens
 import com.example.gamesapp.screens.search.SearchContent
-import com.example.gamesapp.utils.getStoreImageIdByName
-import me.onebone.toolbar.*
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import com.example.gamesapp.utils.getStoreAndImage
 
 @Composable
 fun InfoScreen(navController: NavController, gameId: String, viewModel: InfoViewModel = hiltViewModel()){
@@ -357,34 +356,27 @@ fun BuySiteRow(site: String, context: Context){
     val intent = remember { Intent(Intent.ACTION_VIEW, Uri.parse(site)) }
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
     ) {
-        Column(
-            modifier = Modifier.fillMaxWidth(0.8f)
-        ) {
-            Text(
-                text = site,
-                style = TextStyle(textDecoration = TextDecoration.Underline),
-                color = Color.Blue,
-                fontWeight = FontWeight.Bold,
-                fontSize = 17.sp,
-                modifier = Modifier
-                    .padding(bottom = 6.dp)
-                    .clickable {
-                        context.startActivity(intent)
-                    }
-            )
+        var image = -1
+        var store = ""
+
+        getStoreAndImage(site){ icon, storeName ->
+            image = icon
+            store = storeName
         }
 
-        val image = getStoreImageIdByName(site)
-        if(image > -1){
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(40.dp),
-                verticalArrangement = Arrangement.Center,
 
-                ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .height(40.dp),
+            verticalArrangement = Arrangement.Center,
+
+            ) {
+            if(image > -1){
                 Image(
                     painterResource(image),
                     contentDescription = "storeLogo",
@@ -392,6 +384,54 @@ fun BuySiteRow(site: String, context: Context){
                 )
             }
         }
+
+        Column(
+            modifier = Modifier
+                .weight(3f)
+                .height(40.dp),
+            verticalArrangement = Arrangement.Center,
+            ) {
+            Text(
+                text = store,
+                fontSize = 19.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+
+        Column(
+            modifier = Modifier
+                .weight(2f)
+                .height(40.dp),
+            verticalArrangement = Arrangement.Center
+            ) {
+            Button(
+                onClick = { context.startActivity(intent) },
+                modifier = Modifier
+                    .padding(4.dp)
+                    .fillMaxWidth(),
+                colors = ButtonDefaults.buttonColors(
+                    contentColor = Color.White,
+                    backgroundColor = Color.Red
+                ),
+                shape = RoundedCornerShape(5.dp),
+                elevation = ButtonDefaults.elevation(defaultElevation = 10.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.ShoppingBasket,
+                    contentDescription = "shopping icon",
+                    modifier = Modifier
+                        .weight(1f)
+                )
+                Text(
+                    text = "Buy",
+                    modifier = Modifier
+                        .weight(3f),
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
     }
 
 }

@@ -447,7 +447,7 @@ fun ExpandedCard(
                 Text(
                     text = title,
                     modifier = Modifier.padding(8.dp),
-                    style = MaterialTheme.typography.h4,
+                    style = MaterialTheme.typography.h5,
                     fontWeight = FontWeight.Bold
                 )
                 Icon(
