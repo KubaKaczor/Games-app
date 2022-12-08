@@ -15,7 +15,7 @@ Umożliwia:
 ![image](https://user-images.githubusercontent.com/114807157/205894160-914ea748-bb00-4f42-a5ed-7f09963a9451.png)
 ![image](https://user-images.githubusercontent.com/114807157/205894355-54a5d187-cfd7-419c-99da-249ab9b67ecd.png)
 ![image](https://user-images.githubusercontent.com/114807157/205894584-251a03fa-165d-46eb-a694-b1d23e77717b.png)
-![image](https://user-images.githubusercontent.com/114807157/205894656-5b944ea4-6676-4e51-a467-fe2edffe4697.png)
+![image](https://user-images.githubusercontent.com/114807157/206490441-dbf34074-f6af-4eb5-b77e-1df8797b96f8.png)
 
 - przeglądanie gier na podstawie kategorii, twórcy czy platformy
 
